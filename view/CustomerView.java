@@ -1,6 +1,7 @@
 package view;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Scanner;
 
 // import com.mysql.jdbc.ResultSet;
@@ -142,11 +143,11 @@ public class CustomerView {
 
 
                 case 5:
-                try{
+                // try{
 
                     System.out.println("Enter account number to check balance");
-                    int accNum = sc.nextInt();
-                    customer = new Customer(accNum);
+                    int acc = sc.nextInt();
+                    customer = new Customer(acc);
                     // Create customer controller object and pass customer object
                     controller = new CustomerController();
                     // insert = controller.checkBalance(customer);
@@ -154,26 +155,19 @@ public class CustomerView {
                     // // resultSet = controller.checkBalance(customer);
                     // System.out.println("account "+accNum+" has amount = "+rs);
                     ResultSet rs=controller.checkBalance(customer);
-                    while(rs.next()){
-                        System.out.println("account "+accNum+" has amount = "+rs.getInt(1));
+                    try{
+                        while(rs.next()){
+                            int bal=rs.getInt(1);
+                            // System.out.println("account "+acc+" has amount = "+bal);
+                            System.out.println(bal);
+                        }
                     }
-                    int  balance=rs.getInt(1);
-                    int bal=balance; 
-                    // int acc=rs.getInt(10);
-                    System.out.println("account "+accNum+" has amount = "+balance); 
-                    // System.out.println(bal+"acc");
-
-
-                  
-//getting the record of 3rd row  
-            
-
-            } catch (Exception e) {
-                System.out.println(
-                        " ERR : Enter Valid Data::Insertion Failed!\n");
-            }
-            sc.close();
-                
+                        
+                    catch (SQLException e) {
+                        // TODO: handle exception
+                        e.printStackTrace();
+                    }          
+        
 
                     break;
                 case 6:
