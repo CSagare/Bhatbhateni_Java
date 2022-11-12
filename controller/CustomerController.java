@@ -77,6 +77,6 @@ public int updateAccount(Customer customer1){
 
 
     db=new DbConnection();
-    return db.select(query);
+return db.select(query);
   }
 }

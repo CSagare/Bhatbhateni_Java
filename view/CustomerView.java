@@ -143,33 +143,24 @@ public class CustomerView {
 
 
                 case 5:
-                // try{
-
+                try{
                     System.out.println("Enter account number to check balance");
                     int acc = sc.nextInt();
                     customer = new Customer(acc);
                     // Create customer controller object and pass customer object
                     controller = new CustomerController();
-                    // insert = controller.checkBalance(customer);
-                    // ResultSet rs = controller.checkBalance(customer);
-                    // // resultSet = controller.checkBalance(customer);
-                    // System.out.println("account "+accNum+" has amount = "+rs);
-                    ResultSet rs=controller.checkBalance(customer);
-                    try{
-                        while(rs.next()){
-                            int bal=rs.getInt(1);
-                            // System.out.println("account "+acc+" has amount = "+bal);
-                            System.out.println(bal);
-                        }
+                    ResultSet rs = controller.checkBalance(customer);
+			        while (rs.next()) {
+				    Integer bal = rs.getInt(1);
+				    System.out.println("balance is: " + bal);
                     }
-                        
-                    catch (SQLException e) {
-                        // TODO: handle exception
-                        e.printStackTrace();
-                    }          
-        
-
+                    rs.close();
+                    } catch (Exception e) {
+                    e.printStackTrace();
+                    }
+                    sc.close();
                     break;
+                   
                 case 6:
                     System.out.println("See you soon...");
                     sc.close();
