@@ -154,6 +154,9 @@ public class CustomerView {
                     // // resultSet = controller.checkBalance(customer);
                     // System.out.println("account "+accNum+" has amount = "+rs);
                     ResultSet rs=controller.checkBalance(customer);
+                    while(rs.next()){
+                        System.out.println("account "+accNum+" has amount = "+rs.getInt(1));
+                    }
                     int  balance=rs.getInt(1);
                     int bal=balance; 
                     // int acc=rs.getInt(10);
