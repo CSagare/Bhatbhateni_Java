@@ -4,7 +4,7 @@ import java.sql.*;
 
 public class DbConnection {
 
-    Connection con;
+   public Connection con;
     Statement st;
     Statement stmt;
     ResultSet rows;
@@ -44,11 +44,21 @@ public class DbConnection {
         return val;
     }
 
+    public int insert(PreparedStatement st) {
+        try {
+            val = st.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return val;
+    }
+
     // Function for select statement
     public ResultSet select(String query) {
         try {
             rows = st.executeQuery(query);
-            con.close();
+           
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

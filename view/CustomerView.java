@@ -103,7 +103,7 @@ public class CustomerView {
                         int balance = sc.nextInt();
                         Customer customer1 = new Customer(accNum, balance);
                         controller = new CustomerController();
-                        insert = controller.depositBalance(customer1);
+                        insert = controller.depo(customer1);
                         if (insert > 0) {
                             System.out.println("account Depost successfully");
 
@@ -147,7 +147,7 @@ public class CustomerView {
                     System.out.println("Enter account number to check balance");
                     int acc = sc.nextInt();
                     customer = new Customer(acc);
-                    // Create customer controller object and pass customer object
+                    // Create customer controller5 object and pass customer object
                     controller = new CustomerController();
                     ResultSet rs = controller.checkBalance(customer);
 			        while (rs.next()) {

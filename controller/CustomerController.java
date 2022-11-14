@@ -1,6 +1,10 @@
 package controller;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import com.mysql.cj.PreparedQuery;
 
 import database.DbConnection;
 import model.Customer;
@@ -24,6 +28,34 @@ public class CustomerController {
         db = new DbConnection();
         return db.insert(query);
     }
+    public int depo(Customer customer){
+      // query="update Customer"+
+      // " set balance=balance-"+customer.getbalance()+
+      //         " where AccID='"+customer.getCustId()+"';";
+
+
+      // st.setString(3,String.valueof(customer.getGender()));
+      
+      try {
+      String query="update Customer"+
+      " set balance=balance+"+customer.getbalance()+
+      " where AccID='"+customer.getCustId()+"';";
+        PreparedStatement st=db.con.prepareStatement(query);
+        st.setInt(1,customer.getbalance());
+        return db.insert(st);
+      } catch (SQLException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      }
+    // query="select accNum,balance from Customer "+
+      // customer.getbalance()+";";
+  
+  
+      db=new DbConnection();
+      // String st;
+      // return db.insert(st);
+      return 0;
+    }  
 
 
 public int updateAccount(Customer customer1){
