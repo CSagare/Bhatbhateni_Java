@@ -2,12 +2,15 @@ package database;
 
 import java.sql.*;
 
+import com.mysql.cj.xdevapi.PreparableStatement;
+
 public class DbConnection {
 
    public Connection con;
     Statement st;
     Statement stmt;
     ResultSet rows;
+    PreparedStatement ps;
     int val;
 
     public DbConnection() {
@@ -53,6 +56,7 @@ public class DbConnection {
 
         return val;
     }
+ 
 
     // Function for select statement
     public ResultSet select(String query) {
@@ -64,6 +68,16 @@ public class DbConnection {
         }
         return rows;
     }
+
+    public ResultSet select(PreparedStatement st2) {
+        return null;
+    }
+
+    
+
+    // public PreparableStatement PrepSelect(String query) {
+    //     return null;
+    // }
 
 //     public static void main(String[] args) {
 //         new DbConnection();

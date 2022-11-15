@@ -1,8 +1,11 @@
 package view;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
+
+import com.mysql.cj.xdevapi.PreparableStatement;
 
 // import com.mysql.jdbc.ResultSet;
 // import com.mysql.jdbc.Statement;
@@ -11,7 +14,7 @@ import controller.CustomerController;
 import model.Customer;
 
 public class CustomerView {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         Scanner sc = new Scanner(System.in);
 
         int ch;
@@ -49,17 +52,19 @@ public class CustomerView {
                             accType, 0);
                     // Create customer controller object and pass customer object
                     CustomerController controller = new CustomerController();
-                    int insert = controller.registerCustomer(customer);
+                    int insert = controller.registerAcc(customer);
                     // insert == 1 : Sucessfully inserted
                     // insert == 0 : Error while inserting record
                     if (insert > 0) {
                         System.out.println("Customer added successfully");
-                    } else {
+                    } 
+                    else {
                         System.out.println("Error registering customer");
                     }
-                    sc.close();
 
+                    sc.close();
                     break;
+
                 // edit the Account details
                 case 2:
                     try {
@@ -127,7 +132,7 @@ public class CustomerView {
                 int balance = sc.nextInt();
                 Customer customer1 = new Customer(accNum, balance);
                 controller = new CustomerController();
-                insert = controller.withdraw(customer1);
+                insert = controller.WithDraaw(customer1);
                 if (insert > 0) {
                     System.out.println("account withdraw successfully");
 
@@ -141,7 +146,7 @@ public class CustomerView {
             sc.close();
             break;
 
-
+// Working checking balance for resultset and printing the resultset using while loop
                 case 5:
                 try{
                     System.out.println("Enter account number to check balance");
@@ -160,6 +165,27 @@ public class CustomerView {
                     }
                     sc.close();
                     break;
+
+                    case 11:
+                    try{
+                        System.out.println("Enter account number to check balance");
+                        int acc = sc.nextInt();
+                        customer = new Customer(acc);
+                        // Create customer controller5 object and pass customer object
+                        controller = new CustomerController();
+                        ResultSet rs = controller.Checkbal(customer);
+                        while (rs.next()) {
+                        Integer bal = rs.getInt(1);
+                        System.out.println("balance is: " + bal);
+                        }
+                        rs.close();
+                        } catch (Exception e) {
+                        e.printStackTrace();
+                        }
+                        sc.close();
+                        break;
+
+                   
                    
                 case 6:
                     System.out.println("See you soon...");
